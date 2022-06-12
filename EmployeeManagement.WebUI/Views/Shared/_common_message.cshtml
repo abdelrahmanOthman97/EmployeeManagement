@@ -1,0 +1,18 @@
+﻿<!-- #region name -->
+@{
+    string error = @ViewBag.error;
+    if (!string.IsNullOrEmpty(error))
+    {
+        <script>
+            Swal.fire('Error!', '@error', 'error')
+        </script>
+    }
+    string success = @ViewBag.success;
+    if (!string.IsNullOrEmpty(success))
+    {
+        <script>
+            Swal.fire('Done', '@success', 'success')
+        </script>
+    }
+}
+<!-- #endregion -->

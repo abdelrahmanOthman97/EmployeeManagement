@@ -1,0 +1,55 @@
+﻿@model IEnumerable<EmployeeManagement.Domain.ViewModels.Department.GetDepartmentVM>
+@{
+    ViewData["Title"] = "Departments";
+}
+
+<h1 class="text-center font-weight-bold">Departments</h1>
+<p><a asp-action="Create" class="mb-2 font-weight-semibold font-size-18">Create New Department</a></p>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped table-bordered dt-responsive nowrap text-center">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Manager Id</th>
+                            <th>Manager Name</th>
+                            <th class="text-center font-weight-bold font-size-16">...</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model == null || Model.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="5">No data available in table</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.ManagerId</td>
+                                    <td>@item.ManagerName</td>
+                                    <td>
+                                        <a class="" asp-route-departmentId="@item.Id" asp-action="Edit">Edit</a>
+                                        <a class="text-danger" style="cursor:pointer" onclick="DeleteRequest('@ApiUrlsConfig.Delete.DepartmentApi/@item.Id')">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@await Html.PartialAsync("~/Views/Shared/_common_message.cshtml")
